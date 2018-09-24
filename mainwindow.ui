@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Auto Clicker</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource/resource.qrc">
+    <normaloff>:/icon/click.ico</normaloff>:/icon/click.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -192,6 +196,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

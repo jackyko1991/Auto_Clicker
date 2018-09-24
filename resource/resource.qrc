@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>click.ico</file>
+    <file>click.png</file>
+  </qresource>
+</RCC>
