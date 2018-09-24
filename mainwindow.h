@@ -4,6 +4,8 @@
 #include "ui_mainwindow.h"
 #include "QtWidgets/QMainWindow"
 
+class QTimer;
+
 namespace Ui
 {
 	class MainWindow;
@@ -18,10 +20,11 @@ public:
 
 private:
 	Ui::MainWindow* ui;
+	QTimer* m_timer;
 
 private slots:
 	void syncMethodChanged();
-
+	void click();
 };
 
 #endif
