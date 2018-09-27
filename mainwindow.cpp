@@ -68,7 +68,8 @@ void MainWindow::enableUi(bool enable)
 {
 	this->ui->timeEdit->setEnabled(enable);
 	this->ui->comboBoxSync->setEnabled(enable);
-	
+	disconnect(m_clickerConnection);
+
 	if (enable)
 		this->ui->pushButtonClick->setText("Auto Click!!!");
 	else
@@ -87,9 +88,6 @@ void MainWindow::click()
 
 		return;
 	}
-
-	this->ui->plainTextEdit->appendPlainText(m_dateTime.toString("yyyy-MM-dd hh:mm:ss"));
-	this->ui->plainTextEdit->appendPlainText(QString::number(m_timeDiff.elapsed()));
 
 	// check setted datetime is after current time
 	if (ui->calendarWidget->selectedDate().daysTo(this->getCurrentDateTime().date()) > 0)
@@ -118,22 +116,23 @@ void MainWindow::click()
 
 	m_clickerConnection = connect(m_timer, &QTimer::timeout, [&]() {
 
+		if (this->getCurrentDateTime().msecsTo(this->ui->timeEdit->dateTime()) % 1000 == 0)
+		{
+			this->ui->plainTextEdit->appendPlainText(this->getCurrentDateTime().toString("yyyy-MM-dd hh:mm:ss") + ":");
+			this->ui->plainTextEdit->appendPlainText(this->getCurrentDateTime().msecsTo(this->ui->timeEdit->dateTime()));
+		}
 
 		if (this->getCurrentDateTime().msecsTo(this->ui->timeEdit->dateTime()) < 0)
 		{
-			/*QString timeString = this->getCurrentDateTime().toString("yyyy-MM-dd hh:mm:ss");*/
 			this->ui->plainTextEdit->appendPlainText(this->getCurrentDateTime().toString("yyyy-MM-dd hh:mm:ss") + ":");
 			this->ui->plainTextEdit->appendPlainText("Click!!!");
 			// unlock ui
 			this->enableUi(true);
 			m_clickerStatus = false;
-
-			disconnect(m_clickerConnection);
+			
 			return;
 			
 		}
-
-
 	});
 
 
@@ -237,8 +236,6 @@ void MainWindow::syncMethodChanged()
 			}
 			}
 
-
-			std::cout << info.error() << std::endl;
 			QString ipAddress = info.addresses().first().toString();
 			//m_udpsocket->connectToHost("time.windows.com", 123); //ntp service use port 123
 			m_udpsocket->connectToHost("time.hko.hk", 123); //ntp service use port 123
