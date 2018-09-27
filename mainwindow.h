@@ -4,6 +4,7 @@
 #include "ui_mainwindow.h"
 #include "QtWidgets/QMainWindow"
 #include <QElapsedTimer> // not work with forward declare
+#include <QUdpSocket>
 
 class QTimer;
 class QDateTime;
@@ -32,12 +33,19 @@ private:
 	QTimer* m_timer;
 	QDateTime m_dateTime;
 	QElapsedTimer m_timeDiff;
+	QUdpSocket* m_udpsocket;
+	bool m_clickerStatus; // true if counting down to click
+	QMetaObject::Connection m_clickerConnection;
+
 
 	QDateTime getCurrentDateTime();
+	void enableUi(bool);
 
 private slots:
 	void syncMethodChanged();
 	void click();
+	void connectSuccess();
+	void readinigDataGrams();
 };
 
 #endif
