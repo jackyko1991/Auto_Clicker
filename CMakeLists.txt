@@ -11,6 +11,7 @@ set(CMAKE_AUTOUIC ON)
 
 # Find the QtWidgets library
 find_package(Qt5Widgets CONFIG REQUIRED QUIET)
+find_package(Qt5Network CONFIG REQUIRED QUIET)
 
 # Populate a CMake variable with the sources
 file(GLOB UI_FILES *.ui)
@@ -57,4 +58,4 @@ add_executable(Auto_Clicker MACOSX_BUNDLE
 	${PROJECT_UI_H}
 )
 qt5_use_modules(Auto_Clicker Core Gui)
-target_link_libraries(Auto_Clicker Qt5::Widgets)
+target_link_libraries(Auto_Clicker Qt5::Widgets Qt5::Network)

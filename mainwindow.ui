@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>552</width>
+    <width>564</width>
     <height>401</height>
    </rect>
   </property>
@@ -40,14 +40,14 @@
          <widget class="QLabel" name="label">
           <property name="minimumSize">
            <size>
-            <width>70</width>
-            <height>0</height>
+            <width>90</width>
+            <height>20</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>70</width>
-            <height>16777215</height>
+            <width>90</width>
+            <height>20</height>
            </size>
           </property>
           <property name="text">
@@ -58,7 +58,7 @@
         <item>
          <widget class="QTimeEdit" name="timeEdit">
           <property name="displayFormat">
-           <string>hh:mm:ss AP</string>
+           <string>hh:mm:ss</string>
           </property>
          </widget>
         </item>
@@ -70,13 +70,13 @@
          <widget class="QLabel" name="label_3">
           <property name="minimumSize">
            <size>
-            <width>70</width>
-            <height>0</height>
+            <width>90</width>
+            <height>20</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>70</width>
+            <width>90</width>
             <height>16777215</height>
            </size>
           </property>
@@ -92,6 +92,11 @@
             <string>System</string>
            </property>
           </item>
+          <item>
+           <property name="text">
+            <string>Hong Kong Observatory</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>
@@ -103,17 +108,17 @@
           <property name="minimumSize">
            <size>
             <width>70</width>
-            <height>0</height>
+            <height>20</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>70</width>
-            <height>16777215</height>
+            <width>90</width>
+            <height>20</height>
            </size>
           </property>
           <property name="text">
-           <string>Current Time:</string>
+           <string>Current Datetime:</string>
           </property>
          </widget>
         </item>
@@ -132,7 +137,7 @@
            </size>
           </property>
           <property name="text">
-           <string>00:00:00 AM</string>
+           <string>00:00:00</string>
           </property>
          </widget>
         </item>
@@ -189,7 +194,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>552</width>
+     <width>564</width>
      <height>21</height>
     </rect>
    </property>
