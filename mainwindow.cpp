@@ -13,6 +13,7 @@
 #include <QUdpSocket>
 
 #include <iostream>
+#include <Windows.h>
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent),
@@ -54,8 +55,6 @@ MainWindow::~MainWindow()
 	delete m_udpsocket;
 	delete ui;
 }
-
-
 
 QDateTime MainWindow::getCurrentDateTime()
 {
@@ -115,17 +114,28 @@ void MainWindow::click()
 	this->ui->plainTextEdit->appendPlainText("Auto click counting down, hover the cursor on the place to click");
 
 	m_clickerConnection = connect(m_timer, &QTimer::timeout, [&]() {
+		int remainingTime = this->getCurrentDateTime().msecsTo(this->ui->timeEdit->dateTime());
 
-		if (this->getCurrentDateTime().msecsTo(this->ui->timeEdit->dateTime()) % 1000 == 0)
+		if ( remainingTime % 1000 == 0 && remainingTime <=3000 && remainingTime>999)
 		{
 			this->ui->plainTextEdit->appendPlainText(this->getCurrentDateTime().toString("yyyy-MM-dd hh:mm:ss") + ":");
-			this->ui->plainTextEdit->appendPlainText(this->getCurrentDateTime().msecsTo(this->ui->timeEdit->dateTime()));
+			this->ui->plainTextEdit->appendPlainText(QString::number(remainingTime/1000) + " second(s) to click...");
 		}
 
 		if (this->getCurrentDateTime().msecsTo(this->ui->timeEdit->dateTime()) < 0)
 		{
+			// mouse clicking
+			INPUT input;
+			input.type = INPUT_MOUSE;
+			input.mi.dwFlags = (MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP);
+			input.mi.mouseData = 0; // only applicable to mouse wheel, otherwise set to 0
+			input.mi.dwExtraInfo = NULL;
+			input.mi.time = 0;
+			SendInput(1, &input, sizeof(INPUT));
+
 			this->ui->plainTextEdit->appendPlainText(this->getCurrentDateTime().toString("yyyy-MM-dd hh:mm:ss") + ":");
 			this->ui->plainTextEdit->appendPlainText("Click!!!");
+
 			// unlock ui
 			this->enableUi(true);
 			m_clickerStatus = false;
